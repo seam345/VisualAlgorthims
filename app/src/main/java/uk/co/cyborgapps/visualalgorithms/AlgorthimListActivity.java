@@ -21,8 +21,7 @@ import android.support.v4.app.FragmentActivity;
  * {@link AlgorthimListFragment.Callbacks} interface
  * to listen for item selections.
  */
-public class AlgorthimListActivity extends FragmentActivity
-		implements AlgorthimListFragment.Callbacks
+public class AlgorthimListActivity extends FragmentActivity implements AlgorthimListFragment.Callbacks
 {
 
 	/**
@@ -47,9 +46,7 @@ public class AlgorthimListActivity extends FragmentActivity
 
 			// In two-pane mode, list items should be given the
 			// 'activated' state when touched.
-			((AlgorthimListFragment) getSupportFragmentManager()
-					.findFragmentById(R.id.algorthim_list))
-					.setActivateOnItemClick(true);
+			((AlgorthimListFragment) getSupportFragmentManager().findFragmentById(R.id.algorthim_list)).setActivateOnItemClick(true);
 		}
 
 		// TODO: If exposing deep links into your app, handle intents here.
@@ -71,9 +68,7 @@ public class AlgorthimListActivity extends FragmentActivity
 			arguments.putString(AlgorthimDetailFragment.ARG_ITEM_ID, id);
 			AlgorthimDetailFragment fragment = new AlgorthimDetailFragment();
 			fragment.setArguments(arguments);
-			getSupportFragmentManager().beginTransaction()
-					.replace(R.id.algorthim_detail_container, fragment)
-					.commit();
+			getSupportFragmentManager().beginTransaction().replace(R.id.algorthim_detail_container, fragment).commit();
 
 		} else
 		{

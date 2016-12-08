@@ -45,7 +45,7 @@ public class SortingContent
 		addItem(new SortingItem("11", "Quick Sort smart pivot select multit thread"));
 	}
 
-	public static String getItem (String id)
+	public static String getItem(String id)
 	{
 		return ITEM_MAP.get(id).content;
 	}

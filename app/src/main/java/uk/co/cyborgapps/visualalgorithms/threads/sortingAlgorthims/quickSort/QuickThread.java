@@ -3,9 +3,9 @@ package uk.co.cyborgapps.visualalgorithms.threads.sortingAlgorthims.quickSort;
 import android.graphics.Color;
 import android.os.Handler;
 
-import uk.co.cyborgapps.visualalgorithms.Constants;
-
 import java.util.Random;
+
+import uk.co.cyborgapps.visualalgorithms.Constants;
 
 /**
  * Created by sean on 7/8/15.
@@ -66,10 +66,14 @@ public class QuickThread extends Thread implements Constants
 	{
 
 		if (arr == null || arr.length == 0)
+		{
 			return;
+		}
 
 		if (low >= high)
+		{
 			return;
+		}
 
 		// pick the pivot
 		int middle = low + (high - low) / 2;
@@ -156,9 +160,13 @@ public class QuickThread extends Thread implements Constants
 
 		// recursively sort two sub parts
 		if (low < j)
+		{
 			quickSort(arr, low, j);
+		}
 
 		if (high > i)
+		{
 			quickSort(arr, i, high);
+		}
 	}
 }

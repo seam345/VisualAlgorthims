@@ -3,9 +3,9 @@ package uk.co.cyborgapps.visualalgorithms.threads.sortingAlgorthims.quickSort;
 import android.graphics.Color;
 import android.os.Handler;
 
-import uk.co.cyborgapps.visualalgorithms.Constants;
-
 import java.util.Random;
+
+import uk.co.cyborgapps.visualalgorithms.Constants;
 
 /**
  * Created by sean on 29/07/15 11:19 pecific coast time.
@@ -23,10 +23,10 @@ public class QuickSortMultiThread extends Thread implements Constants
 	public QuickSortMultiThread(Handler handler, int X, int Y, int size, int sleep)
 	{
 		mHandler = handler;
-		maxX =X;
+		maxX = X;
 		maxY = Y;
 		sleepTime = sleep;
-		arraySize =  size;
+		arraySize = size;
 		array = new int[arraySize];
 	}
 
@@ -35,7 +35,7 @@ public class QuickSortMultiThread extends Thread implements Constants
 	{
 		Random random = new Random();
 
-		for (int i=0; i<arraySize; i++)		//creates an array filled with random numbers
+		for (int i = 0; i < arraySize; i++)        //creates an array filled with random numbers
 		{
 			array[i] = random.nextInt(maxY);
 
@@ -68,10 +68,14 @@ public class QuickSortMultiThread extends Thread implements Constants
 
 
 		if (arr == null || arr.length == 0)
+		{
 			return;
+		}
 
 		if (low >= high)
+		{
 			return;
+		}
 
 		// pick the pivot
 		int middle = low + (high - low) / 2;
@@ -84,10 +88,10 @@ public class QuickSortMultiThread extends Thread implements Constants
 			while (arr[i] > pivot)
 			{
 				i++;
-				if (sleepTime!=0)
+				if (sleepTime != 0)
 				{
 					mHandler.obtainMessage(1, i, Color.BLUE, array).sendToTarget();
-					mHandler.obtainMessage(1, i-1, Color.BLACK, array).sendToTarget();
+					mHandler.obtainMessage(1, i - 1, Color.BLACK, array).sendToTarget();
 					mHandler.obtainMessage(2).sendToTarget();
 					try
 					{
@@ -107,7 +111,7 @@ public class QuickSortMultiThread extends Thread implements Constants
 				if (sleepTime != 0)
 				{
 					mHandler.obtainMessage(1, j, Color.BLUE, array).sendToTarget();
-					mHandler.obtainMessage(1, j+1, Color.BLACK, array).sendToTarget();
+					mHandler.obtainMessage(1, j + 1, Color.BLACK, array).sendToTarget();
 					mHandler.obtainMessage(2).sendToTarget();
 
 					try
@@ -134,9 +138,9 @@ public class QuickSortMultiThread extends Thread implements Constants
 				if (sleepTime != 0)
 				{
 					mHandler.obtainMessage(1, i, Color.BLUE, array).sendToTarget();
-					mHandler.obtainMessage(1, i-1, Color.BLACK, array).sendToTarget();
+					mHandler.obtainMessage(1, i - 1, Color.BLACK, array).sendToTarget();
 					mHandler.obtainMessage(1, j, Color.BLUE, array).sendToTarget();
-					mHandler.obtainMessage(1, j+1, Color.BLACK, array).sendToTarget();
+					mHandler.obtainMessage(1, j + 1, Color.BLACK, array).sendToTarget();
 					mHandler.obtainMessage(2).sendToTarget();
 					try
 					{
@@ -167,7 +171,9 @@ public class QuickSortMultiThread extends Thread implements Constants
 			public void run()
 			{
 				if (low < finalJ)
+				{
 					quickSort(arr, low, finalJ);
+				}
 			}
 		};
 
@@ -181,14 +187,16 @@ public class QuickSortMultiThread extends Thread implements Constants
 			public void run()
 			{
 				if (high > finalI)
+				{
 					quickSort(arr, finalI, high);
+				}
 			}
 		};
 
 		Thread thread1 = new Thread(runnable1);
 		thread1.start();
 
-		try				//todo google how long this method takes !
+		try                //todo google how long this method takes !
 		{
 			thread1.join();
 			thread.join();

@@ -61,7 +61,7 @@ public class RainbowInsertionSort extends Thread implements Constants
 		float f = (float) ((endTime - startTime) * 0.000000001);
 		mHandler.obtainMessage(4, f).sendToTarget();
 
-		mHandler.obtainMessage(0,array).sendToTarget();
+		mHandler.obtainMessage(0, array).sendToTarget();
 	}
 
 
@@ -85,7 +85,10 @@ public class RainbowInsertionSort extends Thread implements Constants
 				if (sleepTime != 0)
 				{
 					mHandler.obtainMessage(1, j, Color.BLACK, array).sendToTarget();
-					if (j < arraySize - 1) mHandler.obtainMessage(1, j + 1, colour[j + 1], array).sendToTarget();
+					if (j < arraySize - 1)
+					{
+						mHandler.obtainMessage(1, j + 1, colour[j + 1], array).sendToTarget();
+					}
 					mHandler.obtainMessage(2).sendToTarget();
 					try
 					{
@@ -104,7 +107,10 @@ public class RainbowInsertionSort extends Thread implements Constants
 
 			if (sleepTime != 0)
 			{
-				if (j < arraySize - 1) mHandler.obtainMessage(1, j + 1, colour[j + 1], array).sendToTarget();
+				if (j < arraySize - 1)
+				{
+					mHandler.obtainMessage(1, j + 1, colour[j + 1], array).sendToTarget();
+				}
 				mHandler.obtainMessage(1, j, colour[j], array).sendToTarget();
 				mHandler.obtainMessage(2).sendToTarget();
 			}

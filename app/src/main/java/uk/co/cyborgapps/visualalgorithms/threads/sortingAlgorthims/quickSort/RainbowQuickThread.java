@@ -11,7 +11,7 @@ import uk.co.cyborgapps.visualalgorithms.threads.sortingAlgorthims.RainbowSetup;
  * Created by sean on 6/16/15.
  * performs a quick sort for the rainbow problem
  */
-public class  RainbowQuickThread extends Thread implements Constants
+public class RainbowQuickThread extends Thread implements Constants
 {
 	private int sleepTime;
 	private int arraySize;
@@ -23,11 +23,11 @@ public class  RainbowQuickThread extends Thread implements Constants
 	public RainbowQuickThread(Handler handler, int maxX, int maxY, int size, int sleep, int rainbowNumber)
 	{
 		mHandler = handler;
-		arraySize =  size;
+		arraySize = size;
 		colour = new int[arraySize];
 		array = new int[arraySize];
 		sleepTime = sleep;
-		RainbowSetup rainbowSetup = new RainbowSetup(maxX,maxY,arraySize, rainbowNumber);
+		RainbowSetup rainbowSetup = new RainbowSetup(maxX, maxY, arraySize, rainbowNumber);
 		array = rainbowSetup.setupRainbowArray();
 		colour = rainbowSetup.getColour();
 
@@ -65,10 +65,14 @@ public class  RainbowQuickThread extends Thread implements Constants
 
 
 		if (arr == null || arr.length == 0)
+		{
 			return;
+		}
 
 		if (low >= high)
+		{
 			return;
+		}
 
 		// pick the pivot
 		int middle = low + (high - low) / 2;
@@ -84,7 +88,7 @@ public class  RainbowQuickThread extends Thread implements Constants
 				if (sleepTime != 0)
 				{
 					mHandler.obtainMessage(1, i, Color.BLACK, array).sendToTarget();
-					mHandler.obtainMessage(1, i-1, colour[i-1], array).sendToTarget();
+					mHandler.obtainMessage(1, i - 1, colour[i - 1], array).sendToTarget();
 					mHandler.obtainMessage(2).sendToTarget();
 					try
 					{
@@ -104,7 +108,7 @@ public class  RainbowQuickThread extends Thread implements Constants
 				if (sleepTime != 0)
 				{
 					mHandler.obtainMessage(1, j, Color.BLACK, array).sendToTarget();
-					mHandler.obtainMessage(1, j+1, colour[j+1], array).sendToTarget();
+					mHandler.obtainMessage(1, j + 1, colour[j + 1], array).sendToTarget();
 					mHandler.obtainMessage(2).sendToTarget();
 
 					try
@@ -127,16 +131,16 @@ public class  RainbowQuickThread extends Thread implements Constants
 
 				temp = colour[i];
 				colour[i] = colour[j];
-				colour[j]=temp;
+				colour[j] = temp;
 				i++;
 				j--;
 
 				if (sleepTime != 0)
 				{
 					mHandler.obtainMessage(1, i, Color.BLACK, array).sendToTarget();
-					mHandler.obtainMessage(1, i-1, colour[i-1], array).sendToTarget();
+					mHandler.obtainMessage(1, i - 1, colour[i - 1], array).sendToTarget();
 					mHandler.obtainMessage(1, j, Color.BLACK, array).sendToTarget();
-					mHandler.obtainMessage(1, j+1, colour[j+1], array).sendToTarget();
+					mHandler.obtainMessage(1, j + 1, colour[j + 1], array).sendToTarget();
 					mHandler.obtainMessage(2).sendToTarget();
 					try
 					{
@@ -152,7 +156,7 @@ public class  RainbowQuickThread extends Thread implements Constants
 			}
 		}
 
-		if (sleepTime != 0 )
+		if (sleepTime != 0)
 		{
 			mHandler.obtainMessage(1, i, colour[i], array).sendToTarget();
 			mHandler.obtainMessage(1, j, colour[j], array).sendToTarget();
@@ -161,10 +165,14 @@ public class  RainbowQuickThread extends Thread implements Constants
 
 		// recursively sort two sub parts
 		if (low < j)
+		{
 			quickSort(arr, low, j);
+		}
 
 		if (high > i)
+		{
 			quickSort(arr, i, high);
+		}
 
 	}
 }

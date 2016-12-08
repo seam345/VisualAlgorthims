@@ -77,11 +77,7 @@ public class AlgorthimListFragment extends ListFragment
 		super.onCreate(savedInstanceState);
 
 		// TODO: replace with a real list adapter. kinda cheated
-		setListAdapter(new ArrayAdapter<SortingContent.SortingItem>(
-				getActivity(),
-				android.R.layout.simple_list_item_activated_1,
-				android.R.id.text1,
-				SortingContent.ITEMS));
+		setListAdapter(new ArrayAdapter<SortingContent.SortingItem>(getActivity(), android.R.layout.simple_list_item_activated_1, android.R.id.text1, SortingContent.ITEMS));
 	}
 
 	@Override
@@ -90,8 +86,7 @@ public class AlgorthimListFragment extends ListFragment
 		super.onViewCreated(view, savedInstanceState);
 
 		// Restore the previously serialized activated item position.
-		if (savedInstanceState != null
-				&& savedInstanceState.containsKey(STATE_ACTIVATED_POSITION))
+		if (savedInstanceState != null && savedInstanceState.containsKey(STATE_ACTIVATED_POSITION))
 		{
 			setActivatedPosition(savedInstanceState.getInt(STATE_ACTIVATED_POSITION));
 		}
@@ -149,9 +144,7 @@ public class AlgorthimListFragment extends ListFragment
 	{
 		// When setting CHOICE_MODE_SINGLE, ListView will automatically
 		// give items the 'activated' state when touched.
-		getListView().setChoiceMode(activateOnItemClick
-				? ListView.CHOICE_MODE_SINGLE
-				: ListView.CHOICE_MODE_NONE);
+		getListView().setChoiceMode(activateOnItemClick ? ListView.CHOICE_MODE_SINGLE : ListView.CHOICE_MODE_NONE);
 	}
 
 	private void setActivatedPosition(int position)

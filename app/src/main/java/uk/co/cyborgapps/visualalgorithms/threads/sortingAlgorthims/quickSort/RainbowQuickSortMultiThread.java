@@ -20,17 +20,17 @@ public class RainbowQuickSortMultiThread extends Thread implements Constants
 	private int[] colour;
 	private double rainbowNumber;
 
-	public RainbowQuickSortMultiThread(Handler handler, int X, int Y, int size,int sleep, int tempRainbowNumber)
+	public RainbowQuickSortMultiThread(Handler handler, int X, int Y, int size, int sleep, int tempRainbowNumber)
 	{
 		mHandler = handler;
-		maxX =X;
+		maxX = X;
 		maxY = Y;
 		sleepTime = sleep;
-		arraySize =  size;
+		arraySize = size;
 		colour = new int[arraySize];
 		array = new int[arraySize];
 		rainbowNumber = tempRainbowNumber;
-		RainbowSetup rainbowSetup = new RainbowSetup(maxX,maxY,arraySize,(int) rainbowNumber);
+		RainbowSetup rainbowSetup = new RainbowSetup(maxX, maxY, arraySize, (int) rainbowNumber);
 		array = rainbowSetup.setupRainbowArray();
 		colour = rainbowSetup.getColour();
 
@@ -68,10 +68,14 @@ public class RainbowQuickSortMultiThread extends Thread implements Constants
 
 
 		if (arr == null || arr.length == 0)
+		{
 			return;
+		}
 
 		if (low >= high)
+		{
 			return;
+		}
 
 		// pick the pivot
 		int middle = low + (high - low) / 2;
@@ -87,7 +91,7 @@ public class RainbowQuickSortMultiThread extends Thread implements Constants
 				if (sleepTime != 0)
 				{
 					mHandler.obtainMessage(1, i, Color.BLACK, array).sendToTarget();
-					mHandler.obtainMessage(1, i-1, colour[i-1], array).sendToTarget();
+					mHandler.obtainMessage(1, i - 1, colour[i - 1], array).sendToTarget();
 					mHandler.obtainMessage(2).sendToTarget();
 					try
 					{
@@ -107,7 +111,7 @@ public class RainbowQuickSortMultiThread extends Thread implements Constants
 				if (sleepTime != 0)
 				{
 					mHandler.obtainMessage(1, j, Color.BLACK, array).sendToTarget();
-					mHandler.obtainMessage(1, j+1, colour[j+1], array).sendToTarget();
+					mHandler.obtainMessage(1, j + 1, colour[j + 1], array).sendToTarget();
 					mHandler.obtainMessage(2).sendToTarget();
 
 					try
@@ -130,16 +134,16 @@ public class RainbowQuickSortMultiThread extends Thread implements Constants
 
 				temp = colour[i];
 				colour[i] = colour[j];
-				colour[j]=temp;
+				colour[j] = temp;
 				i++;
 				j--;
 
 				if (sleepTime != 0)
 				{
 					mHandler.obtainMessage(1, i, Color.BLACK, array).sendToTarget();
-					mHandler.obtainMessage(1, i-1, colour[i-1], array).sendToTarget();
+					mHandler.obtainMessage(1, i - 1, colour[i - 1], array).sendToTarget();
 					mHandler.obtainMessage(1, j, Color.BLACK, array).sendToTarget();
-					mHandler.obtainMessage(1, j+1, colour[j+1], array).sendToTarget();
+					mHandler.obtainMessage(1, j + 1, colour[j + 1], array).sendToTarget();
 					mHandler.obtainMessage(2).sendToTarget();
 					try
 					{
@@ -158,28 +162,32 @@ public class RainbowQuickSortMultiThread extends Thread implements Constants
 		if (sleepTime != 0)
 		{
 			mHandler.obtainMessage(1, i, colour[i], array).sendToTarget();
-			if (j > -1) mHandler.obtainMessage(1, j, colour[j], array).sendToTarget(); //todo why it goes to minus 1 idk
+			if (j > -1)
+			{
+				mHandler.obtainMessage(1, j, colour[j], array).sendToTarget(); //todo why it goes to minus 1 idk
+			}
 			mHandler.obtainMessage(2).sendToTarget();
 		}
 
 		// recursively sort two sub parts
-//		if (j > -1)
-//		{
-			final int finalJ = j;
-			Runnable runnable = new Runnable()
+		//		if (j > -1)
+		//		{
+		final int finalJ = j;
+		Runnable runnable = new Runnable()
+		{
+			@Override
+			public void run()
 			{
-				@Override
-				public void run()
+				if (low < finalJ)
 				{
-					if (low < finalJ)
-						quickSort(arr, low, finalJ);
+					quickSort(arr, low, finalJ);
 				}
-			};
+			}
+		};
 
-			Thread thread = new Thread(runnable);
-			thread.start();
-//		}
-
+		Thread thread = new Thread(runnable);
+		thread.start();
+		//		}
 
 
 		final int finalI = i;
@@ -189,7 +197,9 @@ public class RainbowQuickSortMultiThread extends Thread implements Constants
 			public void run()
 			{
 				if (high > finalI)
+				{
 					quickSort(arr, finalI, high);
+				}
 			}
 		};
 

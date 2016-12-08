@@ -3,9 +3,9 @@ package uk.co.cyborgapps.visualalgorithms.threads.sortingAlgorthims.quickSort;
 import android.graphics.Color;
 import android.os.Handler;
 
-import uk.co.cyborgapps.visualalgorithms.Constants;
-
 import java.util.Random;
+
+import uk.co.cyborgapps.visualalgorithms.Constants;
 
 /**
  * Created by sean on 29/07/15 17:14 pecific coast time 17:16 greenwich mean time.
@@ -26,7 +26,7 @@ public class QuickSortSmartPivotMultiThread extends Thread implements Constants
 		maxY = Y;
 		arraySize = size;
 		array = new int[arraySize];
-		sleepTime =sleep;
+		sleepTime = sleep;
 	}
 
 	@Override
@@ -57,8 +57,8 @@ public class QuickSortSmartPivotMultiThread extends Thread implements Constants
 		quickSort(array, 0, arraySize - 1);
 
 		long endTime = System.nanoTime();
-		float f = (float) ((endTime - startTime)*0.000000001);
-		mHandler.obtainMessage(4,f).sendToTarget();
+		float f = (float) ((endTime - startTime) * 0.000000001);
+		mHandler.obtainMessage(4, f).sendToTarget();
 
 		mHandler.obtainMessage(0, array).sendToTarget(); // sends the array back to be drawn
 	}
@@ -68,20 +68,24 @@ public class QuickSortSmartPivotMultiThread extends Thread implements Constants
 		int pivot;
 
 		if (arr == null || arr.length == 0)
+		{
 			return;
+		}
 
 		if (low >= high)
+		{
 			return;
+		}
 
 		// pick the pivot
-		if (high-low > 30)
+		if (high - low > 30)
 		{
 			int middle = (high - low) / 2;
 			int temp;
-			temp = (arr[low]+arr[high]+arr[low +middle]+arr[low+middle/2]+arr[low + middle/2 +middle])/5;
+			temp = (arr[low] + arr[high] + arr[low + middle] + arr[low + middle / 2] + arr[low + middle / 2 + middle]) / 5;
 			pivot = temp;
 
-		}else
+		} else
 		{
 			int middle = low + (high - low) / 2;
 			pivot = arr[middle];
@@ -162,7 +166,7 @@ public class QuickSortSmartPivotMultiThread extends Thread implements Constants
 			}
 		}
 
-		if (sleepTime !=0)
+		if (sleepTime != 0)
 		{
 			mHandler.obtainMessage(1, i, Color.BLACK, array).sendToTarget();
 			mHandler.obtainMessage(1, j, Color.BLACK, array).sendToTarget();
@@ -177,7 +181,9 @@ public class QuickSortSmartPivotMultiThread extends Thread implements Constants
 			public void run()
 			{
 				if (low < finalJ)
+				{
 					quickSort(arr, low, finalJ);
+				}
 			}
 		};
 
@@ -192,7 +198,9 @@ public class QuickSortSmartPivotMultiThread extends Thread implements Constants
 			public void run()
 			{
 				if (high > finalI)
+				{
 					quickSort(arr, finalI, high);
+				}
 			}
 		};
 

@@ -5,6 +5,6 @@ package uk.co.cyborgapps.visualalgorithms;
  */
 public interface Constants
 {
-	int SLEEPTIME =50;
+	int SLEEPTIME = 50;
 }
 

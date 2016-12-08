@@ -38,6 +38,7 @@ import uk.co.cyborgapps.visualalgorithms.threads.sortingAlgorthims.selectionSort
  * in two-pane mode (on tablets) or a {@link AlgorthimDetailActivity}
  * on handsets.
  */
+
 /**
  * A fragment representing a single Algorthim detail screen.
  * This fragment is either contained in a {@link AlgorthimListActivity}
@@ -52,13 +53,13 @@ public class AlgorthimDetailFragment extends Fragment
 	EditText arraySizeEditText, noOFRainbowsEditText, speedEditText;
 	TextView timeTakenTextView;
 	ImageView graphView;
-	Boolean redraw = true , interuptThread = false;
+	Boolean redraw = true, interuptThread = false;
 	Canvas canvas;
 	int arraySize, maxX, maxY, rainbowNumber, sleepTime;
 
-	int[]  colour = null;
+	int[] colour = null;
 
-//	private static final  String TAG = "seanborg";
+	//	private static final  String TAG = "seanborg";
 
 
 	/**
@@ -108,12 +109,12 @@ public class AlgorthimDetailFragment extends Fragment
 		timeTakenTextView = (TextView) rootView.findViewById(R.id.time_text);
 		timeTakenTextView.setOnFocusChangeListener(focusChangeListener);
 
-		graphView= ((ImageView) rootView.findViewById(R.id.graph_view));
+		graphView = ((ImageView) rootView.findViewById(R.id.graph_view));
 		graphView.setOnClickListener(clearFocus);
 		noOFRainbowsEditText = ((EditText) rootView.findViewById(R.id.rainbow_repeat_number));
 		arraySizeEditText = ((EditText) rootView.findViewById(R.id.array_size));
 
-		switch (Integer.parseInt(mItem.id)%2)
+		switch (Integer.parseInt(mItem.id) % 2)
 		{
 			case 0:
 				noOFRainbowsEditText.setHint("Rainbows max = 0");
@@ -124,19 +125,18 @@ public class AlgorthimDetailFragment extends Fragment
 				break;
 		}
 
-		ViewTreeObserver vto =  graphView.getViewTreeObserver();		//todo work out exactly what this is and how it allows me to  get the image view size on load
+		ViewTreeObserver vto = graphView.getViewTreeObserver();        //todo work out exactly what this is and how it allows me to  get the image view size on load
 		vto.addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener()
-								 {
-									 public boolean onPreDraw()
-									 {
-										 graphView.getViewTreeObserver().removeOnPreDrawListener(this);
-										 maxX = graphView.getMeasuredWidth();
-										 maxY = graphView.getMeasuredHeight();
-										 arraySizeEditText.setHint("Max bar No. = " + (Integer.toString(maxX)));
-										 return true;
-									 }
-								 }
-		);
+		{
+			public boolean onPreDraw()
+			{
+				graphView.getViewTreeObserver().removeOnPreDrawListener(this);
+				maxX = graphView.getMeasuredWidth();
+				maxY = graphView.getMeasuredHeight();
+				arraySizeEditText.setHint("Max bar No. = " + (Integer.toString(maxX)));
+				return true;
+			}
+		});
 		return rootView;
 	}
 
@@ -158,7 +158,7 @@ public class AlgorthimDetailFragment extends Fragment
 				int x = (Integer.parseInt(String.valueOf(s)));
 				x = x / 7;
 				noOFRainbowsEditText.setHint("Rainbows max = " + String.valueOf(x));
-			}else
+			} else
 			{
 				noOFRainbowsEditText.setHint("Rainbows max = 0");
 			}
@@ -184,7 +184,7 @@ public class AlgorthimDetailFragment extends Fragment
 					if (b)
 					{
 						timeTakenTextView.setVisibility(View.GONE);
-					}else
+					} else
 					{
 						timeTakenTextView.setVisibility(View.VISIBLE);
 					}
@@ -194,7 +194,7 @@ public class AlgorthimDetailFragment extends Fragment
 					if (b)
 					{
 						speedEditText.setVisibility(View.GONE);
-					}else
+					} else
 					{
 						speedEditText.setVisibility(View.VISIBLE);
 					}
@@ -220,8 +220,6 @@ public class AlgorthimDetailFragment extends Fragment
 	};
 
 
-
-
 	View.OnClickListener startSort = new View.OnClickListener()
 	{
 		@Override
@@ -229,7 +227,10 @@ public class AlgorthimDetailFragment extends Fragment
 		{
 			speedEditText.clearFocus();
 			timeTakenTextView.clearFocus();
-			if (interuptThread) thread.interrupt();
+			if (interuptThread)
+			{
+				thread.interrupt();
+			}
 			try
 			{
 				arraySize = Integer.parseInt(arraySizeEditText.getText().toString());
@@ -247,9 +248,9 @@ public class AlgorthimDetailFragment extends Fragment
 			try
 			{
 				sleepTime = Integer.parseInt(speedEditText.getText().toString());
-			}catch ( Exception e)
+			} catch (Exception e)
 			{
-				sleepTime= 30;
+				sleepTime = 30;
 			}
 			interuptThread = true;
 			switch (Integer.parseInt(mItem.id))
@@ -296,9 +297,9 @@ public class AlgorthimDetailFragment extends Fragment
 					thread.start();
 					break;
 				case 11:
-					thread = new QuickSortSmartPivotMultiThread(mHandler.get(), graphView.getMeasuredWidth(), graphView.getMeasuredHeight(), arraySize,sleepTime);
+					thread = new QuickSortSmartPivotMultiThread(mHandler.get(), graphView.getMeasuredWidth(), graphView.getMeasuredHeight(), arraySize, sleepTime);
 					thread.start();
-//					break;
+					//					break;
 			}
 		}
 	};
@@ -307,7 +308,7 @@ public class AlgorthimDetailFragment extends Fragment
 	public void onStart()
 	{
 		super.onStart();
-		redraw =true;
+		redraw = true;
 	}
 
 	private final ThreadLocal<Handler> mHandler = new ThreadLocal<Handler>()
@@ -324,12 +325,12 @@ public class AlgorthimDetailFragment extends Fragment
 					switch (msg.what)
 					{
 						case 0:
-							drawGraph((int[]) msg.obj, colour,-1,0);	//case  will draw a whole new graph
+							drawGraph((int[]) msg.obj, colour, -1, 0);    //case  will draw a whole new graph
 							break;
 						case 1:
-							if (redraw)		//todo think about how to save the lines that may be erased due to redraw may not be important as it redraws the next lines so soon
+							if (redraw)        //todo think about how to save the lines that may be erased due to redraw may not be important as it redraws the next lines so soon
 							{
-								drawGraph((int[]) msg.obj, colour, -1,0);
+								drawGraph((int[]) msg.obj, colour, -1, 0);
 								redraw = false;
 							} else
 							{
@@ -352,16 +353,16 @@ public class AlgorthimDetailFragment extends Fragment
 		}
 	};
 
-	public void initiateCanvas ()
+	public void initiateCanvas()
 	{
 		Bitmap bitmap;
-		bitmap= Bitmap.createBitmap(maxX, maxY, Bitmap.Config.ARGB_8888);
+		bitmap = Bitmap.createBitmap(maxX, maxY, Bitmap.Config.ARGB_8888);
 		canvas = new Canvas(bitmap);
 
 		graphView.setImageBitmap(bitmap);
 	}
 
-	public void drawGraph ( int[] array,int[] colourArray, int positionOne, int oneColour)
+	public void drawGraph(int[] array, int[] colourArray, int positionOne, int oneColour)
 	{
 		Paint paint;
 		final int maxX = graphView.getMeasuredWidth();
@@ -373,8 +374,8 @@ public class AlgorthimDetailFragment extends Fragment
 		}
 
 		paint = new Paint();
-		int x =0;
-		if (positionOne >= 0)	// to save computation time redrawing the whole graph again we shall just draw over the lines changed in the background colour (white) and then redraw them in the correct size and colour.
+		int x = 0;
+		if (positionOne >= 0)    // to save computation time redrawing the whole graph again we shall just draw over the lines changed in the background colour (white) and then redraw them in the correct size and colour.
 		{
 			for (int t = 0; t < (maxX / arraySize); t++)
 			{
@@ -385,7 +386,7 @@ public class AlgorthimDetailFragment extends Fragment
 				paint.setColor(oneColour);
 				canvas.drawLine((((maxX / arraySize) * positionOne) + t), maxY, (((maxX / arraySize) * positionOne) + t), array[positionOne], paint);
 			}
-		}else
+		} else
 		{
 			canvas.drawColor(Color.WHITE);
 			for (int i = 0; i < arraySize; i++)
@@ -393,7 +394,7 @@ public class AlgorthimDetailFragment extends Fragment
 				if (colourArray == null)
 				{
 					paint.setColor(Color.BLACK);
-				}else
+				} else
 				{
 					paint.setColor(colourArray[i]);
 				}

@@ -23,14 +23,14 @@ public class RainbowSelectionSort extends Thread implements Constants
 	public RainbowSelectionSort(Handler handler, int X, int Y, int size, int sleep, int tempRainbowNumber)
 	{
 		mHandler = handler;
-		maxX =X;
+		maxX = X;
 		maxY = Y;
 		sleepTime = sleep;
-		arraySize =  size;
+		arraySize = size;
 		colour = new int[arraySize];
 		array = new int[arraySize];
 		rainbowNumber = tempRainbowNumber;
-		RainbowSetup rainbowSetup = new RainbowSetup(maxX,maxY,arraySize,(int) rainbowNumber);
+		RainbowSetup rainbowSetup = new RainbowSetup(maxX, maxY, arraySize, (int) rainbowNumber);
 		array = rainbowSetup.setupRainbowArray();
 		colour = rainbowSetup.getColour();
 
@@ -39,7 +39,7 @@ public class RainbowSelectionSort extends Thread implements Constants
 	@Override
 	public void run()
 	{
-		mHandler.obtainMessage(3, colour).sendToTarget();		//only needs to be sent once as its past by refrance and the handerler saves it to a veriable todo maybe work out a more robust way
+		mHandler.obtainMessage(3, colour).sendToTarget();        //only needs to be sent once as its past by refrance and the handerler saves it to a veriable todo maybe work out a more robust way
 		mHandler.obtainMessage(0, array).sendToTarget();
 
 		try
@@ -62,20 +62,23 @@ public class RainbowSelectionSort extends Thread implements Constants
 		mHandler.obtainMessage(0, array).sendToTarget();
 	}
 
-	private void selectionRainbowSort ()
+	private void selectionRainbowSort()
 	{
-		int  min;
+		int min;
 
-		for (int i =0; i< arraySize-1; i++)
+		for (int i = 0; i < arraySize - 1; i++)
 		{
 			min = i;
-			for (int j = i; j < arraySize; j++ )
+			for (int j = i; j < arraySize; j++)
 			{
 
 				if (sleepTime != 0)
 				{
 					mHandler.obtainMessage(1, j, Color.BLACK, array).sendToTarget();
-					if ((min != (j - 1)) && j != 0) mHandler.obtainMessage(1, j - 1, colour[j - 1], array).sendToTarget();
+					if ((min != (j - 1)) && j != 0)
+					{
+						mHandler.obtainMessage(1, j - 1, colour[j - 1], array).sendToTarget();
+					}
 					mHandler.obtainMessage(2).sendToTarget();
 					try
 					{

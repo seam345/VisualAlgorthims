@@ -58,7 +58,7 @@ public class InsertionSortThread extends Thread implements Constants
 		float f = (float) ((endTime - startTime) * 0.000000001);
 		mHandler.obtainMessage(4, f).sendToTarget();
 
-		mHandler.obtainMessage(0,array).sendToTarget();
+		mHandler.obtainMessage(0, array).sendToTarget();
 
 	}
 
@@ -82,7 +82,9 @@ public class InsertionSortThread extends Thread implements Constants
 				{
 					mHandler.obtainMessage(1, j, Color.BLUE, array).sendToTarget();
 					if (j < arraySize - 1)
+					{
 						mHandler.obtainMessage(1, j + 1, Color.BLACK, array).sendToTarget();
+					}
 					mHandler.obtainMessage(2).sendToTarget();
 					try
 					{
@@ -99,7 +101,9 @@ public class InsertionSortThread extends Thread implements Constants
 			if (sleepTime != 0)
 			{
 				if (j < arraySize - 1)
+				{
 					mHandler.obtainMessage(1, j + 1, Color.BLACK, array).sendToTarget();
+				}
 				mHandler.obtainMessage(1, j, Color.BLACK, array).sendToTarget();
 				mHandler.obtainMessage(2).sendToTarget();
 				try
