@@ -1,0 +1,81 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+				xmlns:tools="http://schemas.android.com/tools"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				tools:context=".AlgorthimDetailFragment">
+
+	<LinearLayout
+		android:orientation="horizontal"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_alignParentTop="true"
+		android:layout_alignParentLeft="true"
+		android:layout_alignParentStart="true"
+		android:id="@+id/linearLayout">
+
+		<EditText
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:inputType="number"
+			android:id="@+id/array_size"
+			android:layout_weight="1"
+			android:ellipsize="middle"/>
+
+		<EditText
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:id="@+id/rainbow_repeat_number"
+			android:layout_weight="1"
+			android:ellipsize="middle"
+			android:inputType="number"
+			/>
+	</LinearLayout>
+	<LinearLayout
+		android:orientation="horizontal"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_below="@id/linearLayout"
+		android:layout_alignParentRight="true"
+		android:layout_alignParentEnd="true"
+		android:id="@+id/linearLayout2">
+
+		<Button
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="@string/start_button"
+			android:id="@+id/start_sort_button"
+			/>
+
+		<EditText
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:inputType="number"
+			android:ems="10"
+			android:id="@+id/speed_text"
+			android:layout_weight="1"
+			android:hint="@string/speed_edit_text"
+			android:ellipsize="end"
+			/>
+
+		<TextView
+			android:layout_width="0dp"
+			android:layout_weight="1"
+			android:layout_height="wrap_content"
+			android:textAppearance="?android:attr/textAppearanceMedium"
+			android:id="@+id/time_text"
+			style="@android:style/Widget.EditText"
+			android:hint="@string/time_text_view"
+			android:ellipsize="end"
+			android:lines="1"
+			/>
+	</LinearLayout>
+
+	<ImageView
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent"
+		android:id="@+id/graph_view"
+		android:layout_alignParentLeft="true"
+		android:layout_alignParentStart="true"
+		android:layout_below="@id/linearLayout2"
+		/>
+</RelativeLayout>

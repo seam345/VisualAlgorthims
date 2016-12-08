@@ -1,0 +1,9 @@
+<resources>
+	<string name="app_name">Visual Algorthims</string>
+	<string name="title_algorthim_detail">Algorthim Detail</string>
+
+	<!--Fragment algorthim detail-->
+	<string name="start_button">Start sort</string>
+	<string name="speed_edit_text">Display speed (ms)</string>
+	<string name="time_text_view">Time taken (s)</string>
+</resources>
