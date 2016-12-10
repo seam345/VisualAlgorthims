@@ -44,6 +44,7 @@
 			android:layout_height="wrap_content"
 			android:text="@string/start_button"
 			android:id="@+id/start_sort_button"
+
 			/>
 
 		<EditText

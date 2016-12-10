@@ -1,8 +1,8 @@
 package uk.co.cyborgapps.visualalgorithms;
 
 import android.app.Activity;
+import android.app.ListFragment;
 import android.os.Bundle;
-import android.support.v4.app.ListFragment;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -77,7 +77,7 @@ public class AlgorthimListFragment extends ListFragment
 		super.onCreate(savedInstanceState);
 
 		// TODO: replace with a real list adapter. kinda cheated
-		setListAdapter(new ArrayAdapter<SortingContent.SortingItem>(getActivity(), android.R.layout.simple_list_item_activated_1, android.R.id.text1, SortingContent.ITEMS));
+		setListAdapter(new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_activated_1, android.R.id.text1, SortingContent.ITEMS));
 	}
 
 	@Override

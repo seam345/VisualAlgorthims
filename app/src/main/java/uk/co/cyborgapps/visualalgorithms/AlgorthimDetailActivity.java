@@ -1,9 +1,12 @@
 package uk.co.cyborgapps.visualalgorithms;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+
+import uk.co.cyborgapps.visualalgorithms.arrayList.SortingContent;
 
 /**
  * An activity representing a single Algorthim detail screen. This
@@ -14,7 +17,7 @@ import android.view.MenuItem;
  * This activity is mostly just a 'shell' activity containing nothing
  * more than a {@link AlgorthimDetailFragment}.
  */
-public class AlgorthimDetailActivity extends AppCompatActivity
+public class AlgorthimDetailActivity extends Activity
 {
 
 	@Override
@@ -24,7 +27,8 @@ public class AlgorthimDetailActivity extends AppCompatActivity
 		setContentView(R.layout.activity_algorthim_detail);
 
 		// Show the Up button in the action bar.
-		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		getActionBar().setDisplayHomeAsUpEnabled(true);
+		getActionBar().setTitle(SortingContent.getItem( getIntent().getStringExtra(AlgorthimDetailFragment.ARG_ITEM_ID)));
 
 		// savedInstanceState is non-null when there is fragment state
 		// saved from previous configurations of this activity
@@ -43,7 +47,7 @@ public class AlgorthimDetailActivity extends AppCompatActivity
 			arguments.putString(AlgorthimDetailFragment.ARG_ITEM_ID, getIntent().getStringExtra(AlgorthimDetailFragment.ARG_ITEM_ID));
 			AlgorthimDetailFragment fragment = new AlgorthimDetailFragment();
 			fragment.setArguments(arguments);
-			getSupportFragmentManager().beginTransaction().add(R.id.algorthim_detail_container, fragment).commit();
+			getFragmentManager().beginTransaction().add(R.id.algorthim_detail_container,fragment).commit();
 		}
 	}
 
